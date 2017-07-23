@@ -51,3 +51,8 @@ setopt vi
 # returning from command mode
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
+
+# exec $EDITOR to edit command line
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^z' edit-command-line
