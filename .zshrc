@@ -5,3 +5,6 @@ alias ll="ls -l"
 alias t=tmux
 alias gr="grep --color=auto"
 alias grr="gr -r --exclude-dir=.git"
+
+autoload -Uz compinit
+compinit
