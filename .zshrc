@@ -43,3 +43,11 @@ setopt hist_no_store
 
 # confirm history expansions before executing
 setopt hist_verify
+
+# enable vi like keybinds in Zsh Line Editor
+setopt vi
+
+# backspace and ^h working even after
+# returning from command mode
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
