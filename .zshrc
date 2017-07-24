@@ -1,11 +1,19 @@
+# default overrides
+alias ls="command ls --color=auto"
+alias grep="command grep --color=auto"
+
+# shortcuts
 alias :q=exit
 alias g=git
 alias l=ls
-alias ll="ls -l"
 alias t=tmux
-alias gr="grep --color=auto"
-alias grr="gr -r --exclude-dir=.git"
+alias gr=grep
 
+# shortcuts for common arguments
+alias ll="ls -l"
+alias grr="grep -r --exclude-dir=.git"
+
+# enable tab-completion
 autoload -Uz compinit
 compinit
 
