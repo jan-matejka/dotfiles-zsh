@@ -2,6 +2,8 @@
 export EDITOR="vim"
 export SVNEDITOR=${EDITOR}
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # default overrides
 alias ls="command ls --color=auto"
 alias grep="command grep --color=auto"
