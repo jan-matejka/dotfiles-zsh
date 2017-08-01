@@ -85,3 +85,18 @@ function cs {
   shift
   LANG=cs_CZ.UTF8 $cmd "$@"
 }
+
+function wallclock {
+    tzs=(
+        America/Los_Angeles
+        America/New_York
+        Brazil/East
+        Europe/Prague
+        Europe/Berlin
+        Asia/Tokyo
+    )
+    for i in "${tzs[@]}"; do
+        printf "%-25s" "${i}"
+        TZ="${i}" date "+%a %d %T %:::z"
+    done
+}
