@@ -17,6 +17,16 @@ alias gr=grep
 alias ll="ls -l"
 alias grr="grep -r --exclude-dir=.git"
 
+# shortcuts for grepping media files
+alias gr_video="grep -iE '(avi|flv|mkv|wmv|mpg|mpeg|mp4)'"
+alias gr_pics="grep -iE '(jpg|jpeg|tiff|bmp|png|gif)'"
+
+# shortcut for packing linux initramfs
+alias packinitramfs="cpio --quiet -o -H newc | gzip -9 "
+
+# shortcut to gphoto2 for my camera
+alias gp2eos="gphoto2 --camera \"Canon EOS 350D\""
+
 # enable tab-completion
 autoload -Uz compinit
 compinit
