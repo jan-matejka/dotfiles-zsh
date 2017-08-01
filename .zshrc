@@ -64,3 +64,10 @@ bindkey '^h' backward-delete-char
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^z' edit-command-line
+
+# run argv with czech locale
+function cs {
+  local cmd="$1"
+  shift
+  LANG=cs_CZ.UTF8 $cmd "$@"
+}
