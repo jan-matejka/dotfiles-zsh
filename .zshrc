@@ -1,3 +1,7 @@
+# export default editors
+export EDITOR="vim"
+export SVNEDITOR=${EDITOR}
+
 # default overrides
 alias ls="command ls --color=auto"
 alias grep="command grep --color=auto"
