@@ -4,8 +4,14 @@ export SVNEDITOR=${EDITOR}
 
 export PATH="$HOME/.local/bin:$PATH"
 
+os=$(uname)
+
 # default overrides
-alias ls="command ls --color=auto"
+
+# Enable colored `ls` output when stdout is connected to a terminal.
+[[ $os = "Linux" ]] && alias ls="command ls --color=auto"
+[[ $os = "FreeBSD" ]] && export CLICOLOR=
+
 alias grep="command grep --color=auto"
 
 # shortcuts
