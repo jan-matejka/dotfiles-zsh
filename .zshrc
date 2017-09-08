@@ -4,6 +4,11 @@ export SVNEDITOR=${EDITOR}
 
 export PATH="$HOME/.local/bin:$PATH"
 
+# Define pager. Some programs (like psql on centos6) default to
+# PAGER=more which has weird keybindings. Less is more natural to use for
+# me as vim user.
+export PAGER=less
+
 os=$(uname)
 
 # default overrides
