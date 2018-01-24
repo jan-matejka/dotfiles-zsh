@@ -1,0 +1,73 @@
+# gentoo prompt theme
+
+prompt_gentoo_help () {
+  cat <<'EOF'
+This prompt is color-scheme-able.  You can invoke it thus:
+
+  prompt yac [<promptcolor> [<usercolor> [<rootcolor>]]]
+
+EOF
+}
+
+prompt_gentoo_setup () {
+  autoload -Uz vcs_info
+
+  prompt_gentoo_user=${2:-'cyan'}
+  prompt_gentoo_root=${3:-'red'}
+
+  prompt_gentoo_prompt=${1:-'green'}
+  prompt_gentoo_rc=${3:-'red'}
+  prompt_gentoo_vcs=${3:-'cyan'}
+
+    p_color_host='green'
+
+  if [ "$USER" = 'root' ]
+  then
+    p_color_usr='red'
+  else
+      p_color_usr='cyan'
+  fi
+
+    p_base="%F{$p_color_usr}%n%f@%F{$p_color_host}%M%f"
+  #setopt noxtrace localoptions
+
+  p_cwd="%F{$prompt_gentoo_prompt}%~%f"
+  p_rc="%F{$prompt_gentoo_rc}%(?..[%?%1v])%f"
+  p_vcs="%F{$prompt_gentoo_vcs}%(2v.%2v%u.)%f"
+
+    p_l1="%F{cyan}--------------------------------------------------------------------------------%f"
+    p_l2="$p_cwd $p_vcs $p_rc"
+    p_l3="$p_base %F{$p_color_usr}%#%f "
+
+  PS1="$p_l1$prompt_newline$p_l2$prompt_newline$p_l3"
+  PS2="PS2 $p_base$p_cwd %_> "
+  PS3="PS3 $p_base$p_cwd ?# "
+
+  zstyle ':vcs_info:*' formats '%s:%b'
+
+  add-zsh-hook precmd prompt_yac_precmd
+}
+
+
+prompt_yac_precmd() {
+  setopt noxtrace localoptions extendedglob
+  local prompt_line_1
+  local exitstatus=$?
+
+  #zle_highlight[(r)default:*]="default:fg=$prompt_yac_color4"
+  # this sets default fg color, so don't set it and it will be inherited from terminal program
+
+  psvar=()
+  [[ $exitstatus -ge 128 ]] && psvar[1]=" $signals[$exitstatus-127]" ||
+    psvar[1]=""
+
+  psvar[7]="$history[$[HISTCMD-1]]"    # Use history text, not just number
+
+
+  [[ -o interactive ]] && jobs -l
+
+  vcs_info
+  [[ -n $vcs_info_msg_0_ ]] && psvar[2]="$vcs_info_msg_0_"
+}
+
+prompt_gentoo_setup "$@"

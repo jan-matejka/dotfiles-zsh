@@ -4,10 +4,91 @@ export SVNEDITOR=${EDITOR}
 
 export PATH="$HOME/.local/bin:$PATH"
 
+# unset TMUX so I can run nested sessions without having to always unset it manualy
+unset TMUX
+
 # Define pager. Some programs (like psql on centos6) default to
 # PAGER=more which has weird keybindings. Less is more natural to use for
 # me as vim user.
 export PAGER=less
+
+# set zshzle to vi mode
+setopt VI
+
+# error if file generation has no matches
+# override with setopt NULL_GLOB
+setopt nomatch
+
+# If  a  command  is issued that can't be executed as a normal command,
+# and the command is the name of a directory, perform the cd command to
+# that directory
+setopt auto_cd
+
+# warn about background jobs when exiting
+setopt checkjobs
+
+# do not kill background processes when exiting.
+setopt nohup
+
+# print timing statistics for commands that take more then a second of
+# combined user and system execution time.
+REPORTTIME=1
+
+# add user-local path to paths to autoload functions from
+fpath=($HOME/.zsh/functions $fpath)
+
+
+# load my custom prompt theme
+autoload -Uz promptinit
+promptinit
+prompt yac
+
+function in_tmux() {
+  [[ -z "${TMUX_PANE}" ]] && return 1
+  return 0
+}
+
+function set_tmux_window_name {
+  # Set the window name to the full command
+  # This is helpfull when
+  # 1. ssh <hostname>
+  # 2. looking at multiple man pages
+  # might be troulesome with long commands but the occasional long command
+  # (mostly ad-hoc oneliner scripts that would take up to 20 lines if
+  # written as proper script) has not bothered me in a year of using this
+  # code.
+  in_tmux || return 0
+  tmux rename-window -t${TMUX_PANE} "$1"
+}
+add-zsh-hook preexec set_tmux_window_name
+function reset_tmux_window_name {
+  # resets window name back to "zsh" after a command finishes, to
+  # overwrite name given by `set_tmux_window_name`.
+  in_tmux || return 0
+  tmux rename-window -t${TMUX_PANE} "zsh"
+}
+add-zsh-hook precmd reset_tmux_window_name
+
+# show menu if more than just 1 completion item is available
+zstyle ':completion:*' menu select=2
+
+# expand .. to ../
+zstyle ':completion:*' special-dirs true
+
+if [[ "$TERM" != emacs ]]; then
+    # fix home/end/del keys
+    [[ -z "$terminfo[kdch1]" ]] || bindkey -M vicmd "$terminfo[kdch1]" vi-delete-char
+    [[ -z "$terminfo[khome]" ]] || bindkey -M vicmd "$terminfo[khome]" vi-beginning-of-line
+    [[ -z "$terminfo[kend]" ]] || bindkey -M vicmd "$terminfo[kend]" vi-end-of-line
+
+    [[ -z "$terminfo[khome]" ]] || bindkey -M viins "$terminfo[khome]" vi-beginning-of-line
+    [[ -z "$terminfo[kend]" ]] || bindkey -M viins "$terminfo[kend]" vi-end-of-line
+    [[ -z "$terminfo[kdch1]" ]] || bindkey -M viins "$terminfo[kdch1]" vi-delete-char
+
+    # ncurses fogyatekos
+    [[ "$terminfo[khome]" == "^[O"* ]] && bindkey -M viins "${terminfo[khome]/O/[}" beginning-of-line
+    [[ "$terminfo[kend]" == "^[O"* ]] && bindkey -M viins "${terminfo[kend]/O/[}" end-of-line
+fi
 
 os=$(uname)
 
@@ -78,6 +159,9 @@ setopt hist_no_store
 
 # confirm history expansions before executing
 setopt hist_verify
+
+# don't add duplicates into history
+setopt histignorealldups
 
 # enable vi like keybinds in Zsh Line Editor
 setopt vi
