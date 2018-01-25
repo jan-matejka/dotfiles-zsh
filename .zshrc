@@ -113,3 +113,5 @@ function wallclock {
         TZ="${i}" date "+%a %d %T %:::z"
     done
 }
+
+test -f ~/.zshrc2 && . ~/.zshrc2
