@@ -1,13 +1,8 @@
 .DEFAULT_GOAL := build
 
-conf=$(wildcard config.mk)
-ifneq ($(conf),)
-include config.mk
-endif
-
-zshrc?=$(HOME)/.zshrc
-zshdir=$(HOME)/.zsh
-funcdir=$(zshdir)/functions
+zshrc   ?= $(HOME)/.zshrc
+zshdir   = $(HOME)/.zsh
+funcdir  = $(zshdir)/functions
 
 .PHONY: build
 build:
