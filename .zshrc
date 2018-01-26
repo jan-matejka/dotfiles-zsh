@@ -44,7 +44,12 @@ promptinit
 prompt yac
 
 function in_tmux() {
+  # no pane -> no tmux
   [[ -z "${TMUX_PANE}" ]] && return 1
+
+  # user asked for the hooks to be disabled in this pane
+  ${SH_TMUX_WNAME_HOOKS:-true} || return 1
+
   return 0
 }
 
