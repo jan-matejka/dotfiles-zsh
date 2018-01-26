@@ -46,10 +46,6 @@ prompt yac
 function in_tmux() {
   # no pane -> no tmux
   [[ -z "${TMUX_PANE}" ]] && return 1
-
-  # user asked for the hooks to be disabled in this pane
-  ${SH_TMUX_WNAME_HOOKS:-true} || return 1
-
   return 0
 }
 
@@ -63,6 +59,10 @@ function set_tmux_window_name {
   # written as proper script) has not bothered me in a year of using this
   # code.
   in_tmux || return 0
+  [[ -z ${TMUX_WINDOW_NAME} ]] || return 0
+  # user requested fixed window name by exporting TMUX_WINDOW_NAME
+  # -> NOOP and success exit.
+
   tmux rename-window -t${TMUX_PANE} "$1"
 }
 add-zsh-hook preexec set_tmux_window_name
@@ -70,7 +70,27 @@ function reset_tmux_window_name {
   # resets window name back to "zsh" after a command finishes, to
   # overwrite name given by `set_tmux_window_name`.
   in_tmux || return 0
-  tmux rename-window -t${TMUX_PANE} "zsh"
+  wname="zsh"
+
+  [[ -z ${TMUX_WINDOW_NAME} ]] || {
+    # user requested fixed window name by exporting TMUX_WINDOW_NAME and
+    # window name hasn't changed since last time -> successfull exit.
+    #
+    # This can not be implemented with simple bool flag to disable this
+    # hooks as that causes the client code to 1. disable the hooks and 2.
+    # reset the names again; where we get a race as first step still fires
+    # off the hooks which race against the second step.
+    #
+    # So instead of bool flag, take the intended window name, if it is
+    # non-empty and changed since last run, set it. Otherwise noop exit.
+    declare -g __LAST_TMUX_WINDOW_NAME
+    [[ ${__LAST_TMUX_WINDOW_NAME:-} != ${TMUX_WINDOW_NAME} ]] || return 0
+
+    # re-set wname to the fixed one and continue with setting it.
+    wname="${TMUX_WINDOW_NAME}"
+  }
+
+  tmux rename-window -t${TMUX_PANE} "$wname"
 }
 add-zsh-hook precmd reset_tmux_window_name
 
