@@ -30,6 +30,9 @@ setopt checkjobs
 # do not kill background processes when exiting.
 setopt nohup
 
+# autoload zargs to avoid writing some for loops
+autoload -U zargs
+
 # print timing statistics for commands that take more then a second of
 # combined user and system execution time.
 REPORTTIME=1
