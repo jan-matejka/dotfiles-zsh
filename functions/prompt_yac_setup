@@ -21,7 +21,7 @@ prompt_gentoo_setup () {
 
     p_color_host='green'
 
-  if [ "$USER" = 'root' ]
+  if [ "$EUID" = '0' ]
   then
     p_color_usr='red'
   else
