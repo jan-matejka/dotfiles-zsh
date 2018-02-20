@@ -226,4 +226,8 @@ function wallclock {
     done
 }
 
+function hl {
+  grep --color=auto -e '^' "-e ${^@}"
+}
+
 test -f ~/.zshrc2 && . ~/.zshrc2
