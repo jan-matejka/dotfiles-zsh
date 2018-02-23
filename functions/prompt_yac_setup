@@ -35,8 +35,14 @@ prompt_gentoo_setup () {
   p_rc="%F{$prompt_gentoo_rc}%(?..[%?%1v])%f"
   p_vcs="%F{$prompt_gentoo_vcs}%(2v.%2v%u.)%f"
 
+  p_remote=""
+  if [[ -n ${SSH_CONNECTION} ]] ; then
+    conn=(${=SSH_CONNECTION})
+    p_remote="%F{red}${conn[3]}%f "
+  fi
+
     p_l1="%F{cyan}--------------------------------------------------------------------------------%f"
-    p_l2="$p_cwd $p_vcs $p_rc"
+    p_l2="${p_remote}$p_cwd $p_vcs $p_rc"
     p_l3="$p_base %F{$p_color_usr}%#%f "
 
   PS1="$p_l1$prompt_newline$p_l2$prompt_newline$p_l3"
