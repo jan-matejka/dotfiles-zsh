@@ -40,6 +40,10 @@ REPORTTIME=1
 # add user-local path to paths to autoload functions from
 fpath=($HOME/.zsh/functions $fpath)
 
+# disable XON/XOFF to prevent fat fingers from Ctrl-s hanging the terminal.
+# fyi Ctrl-q resumes after ctrl-s. See
+# https://unix.stackexchange.com/questions/72086/ctrl-s-hang-terminal-emulator
+stty -ixon
 
 # load my custom prompt theme
 autoload -Uz promptinit
