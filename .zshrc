@@ -134,10 +134,12 @@ alias grep="command grep --color=auto"
 
 # shortcuts
 alias :q=exit
+alias d=docker
 alias g=git
-alias l=ls
-alias t=tmux
 alias gr=grep
+alias l=ls
+alias s=systemctl
+alias t=tmux
 
 # shortcuts for common arguments
 alias ll="ls -l"
