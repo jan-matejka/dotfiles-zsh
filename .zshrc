@@ -239,3 +239,8 @@ function hl {
 test -f ~/.zshrc2 && . ~/.zshrc2
 
 alias big-urxvt="urxvt -fn 'xft:DejaVu Sans Mono:pixelsize=30:antialias=true:hinting=true'"
+
+function docker-reload {
+  docker ps -q | xargs docker kill
+  docker container prune -f
+}
