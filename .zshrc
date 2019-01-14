@@ -242,6 +242,8 @@ alias big-urxvt="urxvt -fn 'xft:DejaVu Sans Mono:pixelsize=30:antialias=true:hin
 
 function docker-reload {
   docker ps -q | xargs docker kill
+  # kill doesn't stop containers that are restarting, rm will do
+  docker ps -q | xargs docker rm
   docker container prune -f
 }
 
