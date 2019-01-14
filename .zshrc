@@ -244,3 +244,5 @@ function docker-reload {
   docker ps -q | xargs docker kill
   docker container prune -f
 }
+
+alias d-reload=docker-reload
