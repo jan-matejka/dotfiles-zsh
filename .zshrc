@@ -12,6 +12,10 @@ unset TMUX
 # me as vim user.
 export PAGER=less
 
+# fix javashits rendering
+# https://github.com/xmonad/xmonad/issues/126
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 # set zshzle to vi mode
 setopt VI
 
