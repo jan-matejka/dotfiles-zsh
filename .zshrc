@@ -147,7 +147,7 @@ alias t=tmux
 
 # shortcuts for common arguments
 alias ll="ls -l"
-alias grr="grep -r --exclude-dir=.git"
+alias grr="grep -r --exclude-dir=.git --exclude-dir=.tox"
 
 # shortcuts for grepping media files
 alias gr_video="grep -iE '(avi|flv|mkv|wmv|mpg|mpeg|mp4)'"
