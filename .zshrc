@@ -61,6 +61,7 @@ function in_tmux() {
 }
 
 function set_tmux_window_name {
+  # XXX: this may be deprecated by automatic-rename (man 1 tmux)
   # Set the window name to the full command
   # This is helpfull when
   # 1. ssh <hostname>
