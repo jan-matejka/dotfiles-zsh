@@ -247,11 +247,13 @@ test -f ~/.zshrc2 && . ~/.zshrc2
 
 alias big-urxvt="urxvt -fn 'xft:DejaVu Sans Mono:pixelsize=30:antialias=true:hinting=true'"
 
-function docker-reload {
-  docker ps -q | xargs docker kill
-  # kill doesn't stop containers that are restarting, rm will do
-  docker ps -q | xargs docker rm
-  docker container prune -f
+function docker-grkill {
+  (( $# > 0 )) || {
+    docker ps -q | xargs docker kill
+    return
+  }
+
+  docker ps | grep "$@" | cut -f -1 -d " " | xargs docker kill
 }
 
-alias d-reload=docker-reload
+alias d-grkill=docker-grkill
