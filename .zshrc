@@ -145,6 +145,7 @@ alias gr=grep
 alias l=ls
 alias s=systemctl
 alias t=tmux
+alias yeet=rm
 
 # shortcuts for common arguments
 alias ll="ls -l"
