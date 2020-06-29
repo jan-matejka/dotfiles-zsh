@@ -151,7 +151,7 @@ alias yeet=rm
 alias ll="ls -l"
 
 venv_excludes=$(printf "--exclude-dir=.venv-%s " py27 py35 py36 py37 pypy pypy3 )
-alias grr="grep -r --exclude-dir=.git --exclude-dir=.tox ${venv_excludes[*]}"
+alias grr="grep -r --exclude tags --exclude-dir=.git --exclude-dir=.tox ${venv_excludes[*]}"
 
 # shortcuts for grepping media files
 alias gr_video="grep -iE '(avi|flv|mkv|wmv|mpg|mpeg|mp4)'"
