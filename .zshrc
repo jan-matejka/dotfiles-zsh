@@ -2,6 +2,7 @@
 export EDITOR="vim"
 export SVNEDITOR=${EDITOR}
 
+export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # unset TMUX so I can run nested sessions without having to always unset it manualy
