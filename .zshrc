@@ -5,6 +5,8 @@ export SVNEDITOR=${EDITOR}
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
+export LIBVIRT_DEFAULT_URI="qemu:///system"
+
 # unset TMUX so I can run nested sessions without having to always unset it manualy
 unset TMUX
 
