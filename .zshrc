@@ -7,6 +7,10 @@ export PATH="$HOME/.local/bin:$PATH"
 
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 
+# Customize GOPATH. Default GOPATH=~/go. go-get installs packages into GOPATH.
+export GOPATH=~/.local/go
+path+=("$HOME/.local/go/bin")
+
 # unset TMUX so I can run nested sessions without having to always unset it manualy
 unset TMUX
 
