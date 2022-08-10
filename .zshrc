@@ -7,6 +7,10 @@ export PATH="$HOME/.local/bin:$PATH"
 
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 
+# man 1 manpath
+#  If $MANPATH is prefixed by a colon, then the value of the variable is appended to the list
+#  determined from the content of  the  con‐ figuration  files.
+export MANPATH=:$HOME/.local/man
 # Customize GOPATH. Default GOPATH=~/go. go-get installs packages into GOPATH.
 export GOPATH=~/.local/go
 path+=("$HOME/.local/go/bin")
