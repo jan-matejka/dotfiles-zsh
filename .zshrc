@@ -151,6 +151,7 @@ alias grep="command grep --color=auto"
 # shortcuts
 alias :q=exit
 alias d=docker
+alias b=buildah
 alias g=git
 alias gr=grep
 alias l=ls
