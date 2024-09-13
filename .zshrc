@@ -158,6 +158,7 @@ alias l=ls
 alias s=systemctl
 alias t=tmux
 alias yeet=rm
+alias p=podman
 
 # shortcuts for common arguments
 alias ll="ls -l"
