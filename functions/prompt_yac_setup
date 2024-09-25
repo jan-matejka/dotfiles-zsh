@@ -43,9 +43,10 @@ prompt_gentoo_setup () {
 
     p_l1="%F{cyan}--------------------------------------------------------------------------------%f"
     p_l2="${p_remote}$p_cwd $p_vcs $p_rc"
-    p_l3="$p_base %F{$p_color_usr}%#%f "
+    p_l3="$p_base %F{$p_color_usr}"
+    p_l4="%#%f "
 
-  PS1="$p_l1$prompt_newline$p_l2$prompt_newline$p_l3"
+  PS1="$p_l1$prompt_newline$p_l2$prompt_newline$p_l3$prompt_newline$p_l4"
   PS2="PS2 $p_base$p_cwd %_> "
   PS3="PS3 $p_base$p_cwd ?# "
 
