@@ -159,7 +159,18 @@ alias s=systemctl
 alias t=tmux
 alias yeet=rm
 alias p=podman
-alias pc=podman-compose
+
+function pc() {
+  # Wrap podman-compose to automatically set proper -p because there is no other way to do it.
+  t=$(git rev-parse --show-toplevel 2>/dev/null)
+  [ $? = 0 ] && {
+    p=$(dirname $(realpath --relative-to ~ $t))
+    [ $p = "git/jm/code-golf" ] && {
+      extra=( -p code-golf_message-queue )
+    }
+  }
+  podman-compose ${extra} $@
+}
 
 # shortcuts for common arguments
 alias ll="ls -l"
