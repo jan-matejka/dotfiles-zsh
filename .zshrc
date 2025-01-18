@@ -159,6 +159,8 @@ alias s=systemctl
 alias t=tmux
 alias yeet=rm
 alias p=podman
+alias pps='p ps --format "table {{.Names}}  {{.Status}} {{.Ports}}"'
+
 
 function pc() {
   # Wrap podman-compose to automatically set proper -p because there is no other way to do it.
