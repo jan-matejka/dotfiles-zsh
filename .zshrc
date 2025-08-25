@@ -71,6 +71,16 @@ function in_tmux() {
   return 0
 }
 
+function same_user {
+  # Fixes::
+  #
+  #   can't find pane: %<n>
+  # When the terminal is running with different user from the tmux pane it is
+  # running in.
+  [ $(id -u) = $(id -u $USER) ]
+}
+
+
 function set_tmux_window_name {
   # XXX: this may be deprecated by automatic-rename (man 1 tmux)
   # Set the window name to the full command
@@ -81,6 +91,7 @@ function set_tmux_window_name {
   # (mostly ad-hoc oneliner scripts that would take up to 20 lines if
   # written as proper script) has not bothered me in a year of using this
   # code.
+  same_user || return 0
   in_tmux || return 0
   [[ -z ${TMUX_WINDOW_NAME} ]] || return 0
   # user requested fixed window name by exporting TMUX_WINDOW_NAME
@@ -92,6 +103,7 @@ add-zsh-hook preexec set_tmux_window_name
 function reset_tmux_window_name {
   # resets window name back to "zsh" after a command finishes, to
   # overwrite name given by `set_tmux_window_name`.
+  same_user || return 0
   in_tmux || return 0
   wname="zsh"
 
