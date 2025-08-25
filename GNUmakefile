@@ -10,7 +10,7 @@ build:
 .PHONY: install
 install:
 
-	install -m644 .zshrc $(zshrc)
+	install -m600 .zshrc $(zshrc)
 	install -m700 -d $(HOME)/.local/share/zsh
-	mkdir -p $(funcdir)
-	install -m644 functions/prompt_yac_setup $(funcdir)/prompt_yac_setup
+	install -m700 -d $(funcdir)
+	install -m600 functions/prompt_yac_setup $(funcdir)/prompt_yac_setup
