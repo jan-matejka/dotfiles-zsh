@@ -244,10 +244,6 @@ function wallclock {
     done
 }
 
-function hl {
-  grep --color=auto -e '^' "-e ${^@}"
-}
-
 test -f ~/.zshrc2 && . ~/.zshrc2
 
 alias big-urxvt="urxvt -fn 'xft:DejaVu Sans Mono:pixelsize=30:antialias=true:hinting=true'"
