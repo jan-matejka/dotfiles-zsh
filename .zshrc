@@ -158,43 +158,8 @@ os=$(uname)
 [[ $os = "Linux" ]] && alias ls="command ls --color=auto"
 [[ $os = "FreeBSD" ]] && export CLICOLOR=
 
-alias grep="command grep --color=auto"
-
-# shortcuts
 alias :q=exit
-alias d=docker
-alias b=buildah
-alias g=git
-alias gr=grep
-alias l=ls
-alias s=systemctl
-alias t=tmux
-alias yeet=rm
-alias p=podman
 alias pps='p ps --format "table {{.Names}}  {{.Status}} {{.Ports}}"'
-
-
-function pc() {
-  # Wrap podman-compose to automatically set proper -p because there is no other way to do it.
-  t=$(git rev-parse --show-toplevel 2>/dev/null)
-  [ $? = 0 ] && {
-    p=$(dirname $(realpath --relative-to ~ $t))
-    [ $p = "git/jm/code-golf" ] && {
-      extra=( -p code-golf_message-queue )
-    }
-  }
-  podman-compose ${extra} $@
-}
-
-# shortcuts for common arguments
-alias ll="ls -l"
-
-venv_excludes=$(printf "--exclude-dir=.venv-%s " py27 py35 py36 py37 pypy pypy3 )
-alias grr="grep -r --exclude tags --exclude-dir=.git --exclude-dir=.tox ${venv_excludes[*]}"
-
-# shortcuts for grepping media files
-alias gr_video="grep -iE '(avi|flv|mkv|wmv|mpg|mpeg|mp4)'"
-alias gr_pics="grep -iE '(jpg|jpeg|tiff|bmp|png|gif)'"
 
 # shortcut for packing linux initramfs
 alias packinitramfs="cpio --quiet -o -H newc | gzip -9 "
