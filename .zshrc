@@ -251,14 +251,3 @@ function hl {
 test -f ~/.zshrc2 && . ~/.zshrc2
 
 alias big-urxvt="urxvt -fn 'xft:DejaVu Sans Mono:pixelsize=30:antialias=true:hinting=true'"
-
-function docker-grkill {
-  (( $# > 0 )) || {
-    docker ps -q | xargs docker kill
-    return
-  }
-
-  docker ps | grep "$@" | cut -f -1 -d " " | xargs docker kill
-}
-
-alias d-grkill=docker-grkill
