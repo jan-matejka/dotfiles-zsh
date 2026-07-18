@@ -170,6 +170,10 @@ alias gp2eos="gphoto2 --camera \"Canon EOS 350D\""
 # enable tab-completion
 autoload -Uz compinit
 compinit
+autoload -Uz bashcompinit
+bashcompinit
+pcCompose=/usr/share/bash-completion/completions/podman-compose
+[ -f $pcCompose ] && source $pcCompose
 
 HISTFILE=~/.local/share/zsh/history
 
