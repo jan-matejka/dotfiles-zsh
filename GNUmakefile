@@ -19,3 +19,9 @@ install:
 	install -m700 --owner=$(USER) -d $(zshdir)
 	install -m700 --owner=$(USER) -d $(funcdir)
 	install -m600 --owner=$(USER) functions/prompt_yac_setup $(funcdir)/prompt_yac_setup
+
+.PHONY: diff
+diff:
+
+	diff -burN $(HOME)/.zshrc .zshrc || [ $$? -eq 1 ]
+	diff -burN $(funcdir) functions/ || [ $$? -eq 1 ]
