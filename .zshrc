@@ -7,6 +7,10 @@ export PATH="$HOME/.local/bin:$PATH"
 
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 
+# COMPOSE_MENU: Disable docker-compose's annoying interactive prompt when
+# running non-detached compose up.
+export COMPOSE_MENU=false
+
 # man 1 manpath
 #  If $MANPATH is prefixed by a colon, then the value of the variable is appended to the list
 #  determined from the content of  the  con‐ figuration  files.
