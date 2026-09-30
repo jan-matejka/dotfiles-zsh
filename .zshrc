@@ -27,6 +27,8 @@ unset TMUX
 # me as vim user.
 export PAGER=less
 
+export LESS="-R -F -X"
+
 # fix javashits rendering
 # https://github.com/xmonad/xmonad/issues/126
 export _JAVA_AWT_WM_NONREPARENTING=1
